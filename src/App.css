@@ -1,38 +1,280 @@
-.App {
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url(https://db.onlinewebfonts.com/c/899514ebd390e894ad403011515cde6f?family=HelveticaNeue-Thin);
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Roboto', sans-serif;
+  margin: 0 auto;
+  color: #ececec;
+}
+
+body {
+  background: url(https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?auto=format&fit=crop&q=80&w=2448&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  height: 100vh;
+  background-size: cover;
+  margin: 0 auto;
+}
+
+/* 메인 containerbox */
+.Container-area {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.logo-ser-area, .main-weather-area, .sub-weather-info {
+  width: 92%;
+  display: flex;
+}
+
+/* 로고 / 검색 영역 */
+.logo-ser-area{
+  margin-top: 60px;
+  justify-content: space-between;
+}
+.menu-logo {
+  height: 50px;
+  font-size: 33px;
+  color: #ececec;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+.fabars {
+  font-size: 35px;
+}
+.menu-search {
+  color: #ececec;
+  text-align: right;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+/* 메인 날씨 정보 영역 */
+.main-weather-area{
+  padding-top: 10em;
+}
+.main-weather {
+  text-align: left;
+  width: 100%;
+}
+.location-icon {
+ font-size: 45px;
+ padding-bottom: 6px;
+ margin-right: 30px;
+}
+.weather-city-title {
+  font-size: 70px;
+  font-weight: 500;
+}
+.today-date {
+  font-size: 35px;
+  font-weight: 500;
+  padding-top: 1em;
+  padding-bottom:20px ;
+}
+.now-weather-info{
+  display: flex;
+  justify-content: flex-start ;
+  margin-top: 2em;
+}
+.weather-main-status {
+  font-size: 33px;
+  font-weight: 500;
+  padding-top: 40px;
+}
+.img-icon{
+  width: 160px;
+}
+.weather-main {
+  height: 100px;
+  width: 400px;
+  padding-top: 60px;
+  padding-right: 30px;
+}
+.weather-temp {
+  display: inline-block;
+  font-size: 250px;
+  color: #ececec;
+  font-weight: 200;
+  position: relative;
+  padding-left: 50px;
+  font-family: "HelveticaNeue-Thin";
+}
+.weather-temp::after {
+  content: '℃';
+  font-size: 150px;
+  position: absolute;
+  top:10px;
+}
+
+/* 서브 날씨 정보 영역 */
+.sub-weather-info {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-top: 4em;
+}
+.weekend {
+  width: 65%;
+}
+.div-box1 > h2, .div-box2 > h2 {
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+.sub-weather-info-data {
+  width: 35%;
+}
+.div-box1, .div-box2 {
+  width: 94%;
+  height: 400px;
+  background-color: rgba(46, 48, 47, 0.5);
+  border-radius: 30px;
+  margin-top: 20px;
+  padding: 40px 40px;
+  box-sizing: border-box;
+}
+.div-box2 {
+  width: 100%;
+}
+.container-day {
+  display: grid ;
+  grid-template-columns: repeat(7, auto);
+  grid-template-rows: repeat(1, auto);
+  margin-top: 2em;
+  height: 250px;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.day-item {
+  box-sizing: border-box;
+ }
+.container-info {
+  display: grid ;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(3, auto);
+  margin-top: 2em;
+  height: 250px;
+}
+.info-t1, .info-t2 {
+  padding-top: 25px ;
+  font-size: 20px;
+}
+.info-t2 {
+  text-align: right;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.color1 {background-color: red;}
+.color2 {background-color: orange;}
+.color3 {background-color: yellow;}
+.color4 {background-color: greenyellow;}
+.color5 {background-color: skyblue;}
+.color6 {background-color: blue;}
+.color7 {background-color: blueviolet;}
+
+.search-menu-area {
+  display: none;
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: rgba(46, 48, 47, 0.9);
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 50px;
+}
+.search {
+  position: relative;
+  width: 100%;
+
+}
+input {
+  width: 78%;
+  height: 80px;
+  border: none;
+  border-bottom: 2px solid #ececec;
+  padding: 10px 12px;
+  font-size: 14px;
+  background-color: transparent;
+  font-size: 20px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  color: #ececec;
+}
+.searchbar-icon {
+  position: absolute;
+  color: #ececec;
+  top: 20px;
+  right: 50px;
+}
+input:focus {outline:none;}
+
+.Bookmark-move {
+  font-weight: 300;
+  padding: 20px 0 ;
+}
+
+
+/* 반응형 화면조종 768px */
+@media screen and (max-width: 768px) {
+  body {
+    height: 100%;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .menu-logo {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+  .menu-search {
+    width: 100%;
   }
+  .weather-city-title, .today-date, .now-weather-info{
+    text-align: center;
+  }
+  .weather-main {
+    width: 45%;
+    height: 100%;
+  }
+  .weather-temp {
+    padding: 30px 0 0 0px;
+    /* padding-top: 30px; */
+    font-size: 200px;
+  }
+  .weather-temp::after {
+    content: '℃';
+    font-size: 80px;
+    position: absolute;
+    top:50px;
+  }
+  .img-icon {
+    width: 120px;
+  }
+  .weather-main-status {
+    font-size: 25px;
+  }
+  .sub-weather-info {
+    flex-direction: column;
+    
+  }
+  .weekend, .sub-weather-info-data {
+    width: 100%;
+  }
+  .div-box1, .div-box2 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .div-box1 > h2, .div-box2 >h2 {
+     font-size: 25px;
+     border-bottom: 1px  solid #ececec;
+     padding-bottom: 15px;
+  }
+  .container-day {
+    display: grid ;
+    width: 100%;
+    height:75%;
+    grid-template-columns: repeat(7, 30%);
+    grid-template-rows: repeat(1, auto);
+    text-align: center;
+    overflow:hidden; 
+    overflow: scroll;
+    white-space: nowrap;
+  }
+  
 }
