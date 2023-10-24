@@ -9,7 +9,18 @@ function App() {
 
   const [weather, setWeather] = useState(null)
   const [dayWeather, setDayWeather] = useState(null)
-  const bookmark = ['My Location', 'Seoul', 'NewYork', 'Tokyo' ]
+  const bookmark = ['Seongnam-si', 'Seoul', 'New York', 'Tokyo']
+  const [city, setCity] = useState('')
+  const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuVisible(!isMenuVisible);
+  };
+
+  const closeMenu = () => {
+    setIsMenuVisible(false);
+  };
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -21,31 +32,63 @@ function App() {
   };
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=ko&appid=${apiKey}&units=metric`
-    const response = await fetch(url)
+    const response = await fetch(url);
     const data = await response.json();
     setWeather(data);
   };
 
   const getSevenDayWeatherByCurrentLocation = async (lat, lon) => {
-    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=metric`
-    const response = await fetch(url)
-    const data2 = await response.json();
-    setDayWeather(data2);
+    const response = await fetch(url);
+    const data = await response.json();
+    setDayWeather(data);
   };
 
+  const searchWeather = async (city) => {
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const dayWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=7&appid=${apiKey}&units=metric`;
+
+    const [weatherResponse, dayWeatherResponse] = await Promise.all([
+      fetch(weatherUrl),
+      fetch(dayWeatherUrl)
+    ]);
+
+    const [weatherData, dayWeatherData] = await Promise.all([
+      weatherResponse.json(),
+      dayWeatherResponse.json()
+    ]);
+
+    setWeather(weatherData);
+    setDayWeather(dayWeatherData);
+  };
 
   useEffect(() => {
-    getCurrentLocation()
-  }, []);
+    if (city === '') {
+      getCurrentLocation();
+    } else {
+      searchWeather(city);
+    }
+  }, [city]);
 
-  return(
+  return (
     <div>
-       <MyLocation weather={weather} dayWeather={dayWeather}/>
-       <WeatherSevenDay weather={weather} dayWeather={dayWeather}/>
-       <SearchMenu bookmark={bookmark} />
+      <MyLocation
+        weather={weather}
+        searchWeather={searchWeather}
+        toggleMenu={toggleMenu}
+      />
+      {isMenuVisible && <SearchMenu
+        bookmark={bookmark}
+        setCity={setCity}
+        searchWeather={searchWeather}
+        closeMenu={closeMenu}
+      />}
+      <WeatherSevenDay
+        weather={weather}
+        dayWeather={dayWeather}
+        setCity={setCity}
+      />
     </div>
   )
 }
