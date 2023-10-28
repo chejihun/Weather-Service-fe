@@ -8,11 +8,12 @@ function App() {
 
   const [weather, setWeather] = useState(null)
   const [dayWeather, setDayWeather] = useState(null)
-  const bookmark = ['Seongnam-si', 'Seoul', 'New York', 'Tokyo']
-  const [city, setCity] = useState('')
+  const bookmark = ['My Location', 'Seongnam-si', 'Seoul', 'New York', 'Tokyo']
+  const [city, setCity] = useState('My Location')
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [loading, setLoading] = useState(false)
 
   let backgroundWeather = (id) => {
     if (id >= 200 && id < 300) {
@@ -38,7 +39,7 @@ function App() {
   };
 
   const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
+    navigator.geolocation.getCurrentPosition(position => {
       const lat = position.coords.latitude
       const lon = position.coords.longitude
       getWeatherByCurrentLocation(lat, lon);
@@ -61,10 +62,12 @@ function App() {
     setDayWeather(data);
   };
 
-  const searchWeather = async (city) => {
+  const searchWeather = async city => {
+    setLoading(true)
+
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     const dayWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=7&appid=${apiKey}&units=metric`;
-
+    
     const [weatherResponse, dayWeatherResponse] = await Promise.all([
       fetch(weatherUrl),
       fetch(dayWeatherUrl)
@@ -75,6 +78,12 @@ function App() {
       dayWeatherResponse.json()
     ]);
 
+    setLoading(false)
+    // 실패 
+    if (!weatherData?.weather || !weatherData?.wind || !dayWeatherData?.city || !dayWeatherData?.list) {
+      return alert(weatherData.message || dayWeatherData.message)
+    }
+
     setWeather(weatherData);
     setDayWeather(dayWeatherData);
     setBackgroundImage(backgroundWeather(weatherData.weather[0].id));
@@ -82,7 +91,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (city === '') {
+    if (city === 'My Location') {
       getCurrentLocation();
       
     } else {
@@ -91,18 +100,24 @@ function App() {
   }, [city]);
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
       <MyLocation
         weather={weather}
         searchWeather={searchWeather}
         toggleMenu={toggleMenu}
-        backgroundImage={backgroundImage}
       />
       {isMenuVisible && <SearchMenu
         bookmark={bookmark}
         setCity={setCity}
         searchWeather={searchWeather}
         closeMenu={closeMenu}
+        loading={loading}
       />}
       <WeatherSevenDay
         weather={weather}

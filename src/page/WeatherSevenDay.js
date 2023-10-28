@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 
 const WeatherSevenDay = ({ weather, dayWeather, setCity }) => {
   const windSpeed = (weather && (weather.wind.speed * 3.6).toFixed(2)) || "0.00";
+  
   return (
     <div>
       <Container className='Container-area'>

@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-const MyLocation = ({ weather, toggleMenu, backgroundImage }) => {
+const MyLocation = ({ weather, toggleMenu }) => {
 
   let formattedDate = "";
   if (weather && weather.dt) {
@@ -19,9 +19,6 @@ const MyLocation = ({ weather, toggleMenu, backgroundImage }) => {
 
   return (
     <div>
-      <div>
-       <img src={backgroundImage} className='backgorund'/>
-      </div>
       <Container className='Container-area'>
         <Row className='logo-ser-area'>
           <Col className='menu-logo'>the weather</Col>
