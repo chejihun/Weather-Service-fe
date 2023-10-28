@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom";import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyLocation from './page/MyLocation';
 import WeatherSevenDay from './page/WeatherSevenDay';
 import SearchMenu from './page/SearchMenu';
@@ -24,7 +24,7 @@ function App() {
       return 'https://images.unsplash.com/photo-1511131341194-24e2eeeebb09?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     } else if (id >= 700 && id < 800) {
       return 'https://images.unsplash.com/photo-1543968996-ee822b8176ba?auto=format&fit=crop&q=80&w=2428&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    } else if (id > 800 ) {
+    } else if (id > 800) {
       return 'https://images.unsplash.com/photo-1419833173245-f59e1b93f9ee?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     }
     return 'https://images.unsplash.com/photo-1545193544-312983719627?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
