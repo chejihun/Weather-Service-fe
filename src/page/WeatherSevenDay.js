@@ -3,8 +3,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
-const WeatherSevenDay = ({ weather, dayWeather, setCity }) => {
-  const windSpeed = (weather && (weather.wind.speed * 3.6).toFixed(2)) || "0.00";
+const WeatherSevenDay = ({ todayWeather, sevendaysWeather, setCityName }) => {
+  const windSpeed = (todayWeather && (todayWeather.wind.speed * 3.6).toFixed(2)) || "0.00";
   
   return (
     <div>
@@ -14,8 +14,8 @@ const WeatherSevenDay = ({ weather, dayWeather, setCity }) => {
             <div className='div-box1'>
               <h2>Weather 7 Days</h2>
               <div className='container-day'>
-                {dayWeather && dayWeather.list.slice(0, 7).map((day, index) => {
-                  setCity={setCity}
+                {sevendaysWeather && sevendaysWeather.list.slice(0, 7).map((day, index) => {
+                  setCityName={setCity: setCityName}
                   const currentDate = new Date();
                   currentDate.setDate(currentDate.getDate() + index);
                   const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'short' });
@@ -37,9 +37,9 @@ const WeatherSevenDay = ({ weather, dayWeather, setCity }) => {
               <h2>Weather Info</h2>
               <div className='container-info'>
                 <div className='day-item info-t1'>Cloudy</div>
-                <div className='day-item info-t2'>{weather && weather.clouds.all}%</div>
+                <div className='day-item info-t2'>{todayWeather && todayWeather.clouds.all}%</div>
                 <div className='day-item info-t1'>Humidity</div>
-                <div className='day-item info-t2'>{weather && weather.main.humidity}%</div>
+                <div className='day-item info-t2'>{todayWeather && todayWeather.main.humidity}%</div>
                 <div className='day-item info-t1'>Wind</div>
                 <div className='day-item info-t2'>{windSpeed}m/s</div>
               </div>

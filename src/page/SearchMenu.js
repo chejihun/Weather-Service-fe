@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 
-const SearchMenu = ({ bookmark, setCity, searchWeather, closeMenu, loading }) => {
+const SearchMenu = ({ bookmark, setCityName, searchWeather, closeMenu, loading }) => {
   
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -44,7 +44,7 @@ const SearchMenu = ({ bookmark, setCity, searchWeather, closeMenu, loading }) =>
         {bookmark.map((item, index) => (
           <Button className='Bookmark-move'
             key={index}
-            onClick={() => setCity(item)}
+            onClick={() => setCityName(item)}
           >
             {item}
           </Button>

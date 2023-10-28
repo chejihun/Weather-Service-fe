@@ -5,11 +5,11 @@ import Col from 'react-bootstrap/Col';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-const MyLocation = ({ weather, toggleMenu }) => {
+const MyLocation = ({ todayWeather, toggleMenu }) => {
 
   let formattedDate = "";
-  if (weather && weather.dt) {
-    const timestamp = weather.dt * 1000;
+  if (todayWeather && todayWeather.dt) {
+    const timestamp = todayWeather.dt * 1000;
     const date = new Date(timestamp);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     formattedDate = date.toLocaleDateString('en-US', options);
@@ -29,16 +29,16 @@ const MyLocation = ({ weather, toggleMenu }) => {
         <Row className='main-weather-area'>
           <Col className='main-weather'>
             <h1 className='weather-city-title'>
-              {weather && weather.name}</h1>
+              {todayWeather && todayWeather.name}</h1>
             <h6 className='today-date'>{formattedDate}
             </h6>
             <div className='now-weather-info'>
               <div className="weather-main">
                 <div className='weather-temp'>
-                  {weather && Math.floor(weather.main.temp)}
+                  {todayWeather && Math.floor(todayWeather.main.temp)}
                 </div>
                 <h6 className='weather-main-status'>
-                  {weather && weather.weather[0].description.toUpperCase()}
+                  {todayWeather && todayWeather.weather[0].description.toUpperCase()}
                 </h6>
               </div>
             </div>
