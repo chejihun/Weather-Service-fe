@@ -47,7 +47,6 @@ function App() {
     });
   };
 
-
   const searchWeather = async cityName => {
     setLoading(true)
     
@@ -77,11 +76,9 @@ function App() {
   }, [cityName]);
 
   return (
-    <div
+    <div className='back-img'
       style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundImage: `url(${backgroundImage})`
       }}
     >
       <MyLocation
@@ -104,8 +101,7 @@ function App() {
         setCityName={setCityName}
       />
     </div>
-    
   )
-}
+};
 
 export default App;
